@@ -5,6 +5,7 @@ import com.mkyong.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,11 @@ public class BookService {
     public List<Book> findByTitle(String title) {
         return bookRepository.findByTitle(title);
     }
+
+    public List<Book> findByPrice(BigDecimal price) {
+        return bookRepository.findByPrice(price);
+    }
+
 
     public List<Book> findByPublishedDateAfter(LocalDate date) {
         return bookRepository.findByPublishedDateAfter(date);

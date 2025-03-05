@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Book> findById(@PathVariable Long id) {
+    public Optional<Book> findById(@PathVariable("id") Long id) {
         return bookService.findById(id);
     }
 
@@ -44,18 +45,23 @@ public class BookController {
     // delete a book
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         bookService.deleteById(id);
     }
 
     @GetMapping("/find/title/{title}")
-    public List<Book> findByTitle(@PathVariable String title) {
+    public List<Book> findByTitle(@PathVariable("title") String title) {
         return bookService.findByTitle(title);
+    }
+
+    @GetMapping("/find/price/{price}")
+    public List<Book> findByPrice(@PathVariable("price") BigDecimal price) {
+        return bookService.findByPrice(price);
     }
 
     @GetMapping("/find/date-after/{date}")
     public List<Book> findByPublishedDateAfter(
-            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+            @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return bookService.findByPublishedDateAfter(date);
     }
 

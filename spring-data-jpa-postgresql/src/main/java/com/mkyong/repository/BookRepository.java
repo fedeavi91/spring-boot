@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByTitle(String title);
+    List<Book> findByPrice(BigDecimal price);
 
     // Custom query
     @Query("SELECT b FROM Book b WHERE b.publishDate > :date")
